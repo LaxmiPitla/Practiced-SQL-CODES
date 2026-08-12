@@ -41,4 +41,13 @@ cte_mobile AS (
 SELECT
     (SELECT COUNT(*) FROM cte_laptop) AS laptop_views,
     (SELECT COUNT(*) FROM cte_mobile) AS mobile_views;
-/*============================================*/
+
+/*====================Average Post Hiatus (Part 1)========================*/
+
+SELECT user_id, 
+DATEDIFF(max(post_date),min(post_date)) as days_between
+FROM posts
+where year(post_date)= 2021
+group by user_id
+having count(post_id)>=2;
+/*=======================================================================*/
