@@ -59,4 +59,14 @@ where  EXTRACT(year from sent_date)= 2022 AND EXTRACT (MONTH from sent_date) =8
 group by sender_id
 order by count(message_id) DESC
 limit 2;
-/*========================================================================*/
+/*=========================Duplicate Job Listings===============================================*/
+
+SELECT count(*)
+from 
+(SELECT company_id
+FROM job_listings
+group by company_id
+having count(job_id)>1)as t
+
+/*===============================================================================================*/
+
