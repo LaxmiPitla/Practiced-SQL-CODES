@@ -1,7 +1,6 @@
 /*===========================EASY TYPE==============================================*/
-/*
-Histogram of tweets SQL question 
-*/
+/*Histogram of tweets SQL question */
+
 select tweet_bucket, count(tweet_bucket) as users_num
 from
 (
@@ -11,3 +10,18 @@ where date_part('year',tweet_date) = 2022
 group by user_id
 ) as temp 
 group by tweet_bucket ;
+/*=======================DATA SCIENCE SKILLS ========================================*/
+
+SELECT  candidate_id
+FROM candidates
+where  skill in('Python','Tableau','PostgreSQL')
+group by candidate_id
+having count(skill)=3;
+
+/*============================Page With No Likes=============================*/
+SELECT  p.page_id FROM pages as p
+left join  page_likes as s
+on p.page_id = s.page_id
+where s.page_id is NULL
+order by p.page_id ASC 
+;
