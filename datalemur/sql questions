@@ -1,5 +1,5 @@
 /*===========================EASY TYPE==============================================*/
-/*Histogram of tweets SQL question */
+/1. *Histogram of tweets SQL question */
 
 select tweet_bucket, count(tweet_bucket) as users_num
 from
@@ -10,7 +10,7 @@ where date_part('year',tweet_date) = 2022
 group by user_id
 ) as temp 
 group by tweet_bucket ;
-/*=======================DATA SCIENCE SKILLS ========================================*/
+/*2. =======================DATA SCIENCE SKILLS ========================================*/
 
 SELECT  candidate_id
 FROM candidates
@@ -18,7 +18,7 @@ where  skill in('Python','Tableau','PostgreSQL')
 group by candidate_id
 having count(skill)=3;
 
-/*============================Page With No Likes=============================*/
+/*3. ============================Page With No Likes=============================*/
 SELECT  p.page_id FROM pages as p
 left join  page_likes as s
 on p.page_id = s.page_id
@@ -26,12 +26,12 @@ where s.page_id is NULL
 order by p.page_id ASC 
 ;
 
-/*============================UNFINISHED PARTS=============================*/
+/*4. ===========================UNFINISHED PARTS=============================*/
 SELECT part, assembly_step
 FROM parts_assembly
 where finish_date is NULL;
 
-/*===================Laptop vs. Mobile Viewership (NEWYORK TIMES)============================*/
+/*5. ===================Laptop vs. Mobile Viewership (NEWYORK TIMES)============================*/
 WITH cte_laptop AS (
     SELECT * FROM viewership WHERE device_type = 'laptop'
 ),
@@ -42,7 +42,7 @@ SELECT
     (SELECT COUNT(*) FROM cte_laptop) AS laptop_views,
     (SELECT COUNT(*) FROM cte_mobile) AS mobile_views;
 
-/*====================Average Post Hiatus (Part 1)========================*/
+/*6. ====================Average Post Hiatus (Part 1)========================*/
 
 SELECT user_id, 
 DATEDIFF(max(post_date),min(post_date)) as days_between
@@ -50,7 +50,7 @@ FROM posts
 where year(post_date)= 2021
 group by user_id
 having count(post_id)>=2;
-/*=========================Teams Power Users==============================================*/
+/*7. =========================Teams Power Users==============================================*/
 
 SELECT sender_id,
 count(message_id)
@@ -59,7 +59,7 @@ where  EXTRACT(year from sent_date)= 2022 AND EXTRACT (MONTH from sent_date) =8
 group by sender_id
 order by count(message_id) DESC
 limit 2;
-/*=========================Duplicate Job Listings===============================================*/
+/*8. =========================Duplicate Job Listings===============================================*/
 
 SELECT count(*)
 from 
@@ -68,5 +68,26 @@ FROM job_listings
 group by company_id
 having count(job_id)>1)as t
 
-/*===============================================================================================*/
+/*9. =============================Cities With Completed Trades===========================================*/
+
+SELECT u.city ,
+count(t.status) FROM trades as t
+left join users as u 
+on t.user_id = u.user_id
+where t.status = 'Completed' 
+group by u.city 
+order by  count(t.status) desc 
+limit 3;
+
+/*10. =============================Average Review Ratings==============================================*/
+
+SELECT EXTRACT(month from submit_date) as MONTH,
+product_id, round(avg(stars),2)
+FROM reviews
+group by EXTRACT(month from submit_date), product_id
+order by EXTRACT(month from submit_date),product_id;
+
+/*11. ==================================================================*/
+
+
 
