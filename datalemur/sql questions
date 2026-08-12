@@ -1,0 +1,13 @@
+/*===========================EASY TYPE==============================================*/
+/*
+Histogram of tweets SQL question 
+*/
+select tweet_bucket, count(tweet_bucket) as users_num
+from
+(
+SELECT user_id,count(tweet_id) as tweet_bucket
+FROM tweets
+where date_part('year',tweet_date) = 2022
+group by user_id
+) as temp 
+group by tweet_bucket ;
