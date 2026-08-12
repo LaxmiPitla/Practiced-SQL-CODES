@@ -30,3 +30,15 @@ order by p.page_id ASC
 SELECT part, assembly_step
 FROM parts_assembly
 where finish_date is NULL;
+
+/*===================Laptop vs. Mobile Viewership (NEWYORK TIMES)============================*/
+WITH cte_laptop AS (
+    SELECT * FROM viewership WHERE device_type = 'laptop'
+),
+cte_mobile AS (
+    SELECT * FROM viewership WHERE device_type IN ('phone', 'tablet')
+)
+SELECT
+    (SELECT COUNT(*) FROM cte_laptop) AS laptop_views,
+    (SELECT COUNT(*) FROM cte_mobile) AS mobile_views;
+/*============================================*/
