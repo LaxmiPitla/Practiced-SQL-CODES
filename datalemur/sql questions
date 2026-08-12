@@ -25,3 +25,8 @@ on p.page_id = s.page_id
 where s.page_id is NULL
 order by p.page_id ASC 
 ;
+
+/*============================UNFINISHED PARTS=============================*/
+SELECT part, assembly_step
+FROM parts_assembly
+where finish_date is NULL;
