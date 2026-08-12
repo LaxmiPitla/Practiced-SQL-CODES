@@ -50,4 +50,13 @@ FROM posts
 where year(post_date)= 2021
 group by user_id
 having count(post_id)>=2;
-/*=======================================================================*/
+/*=========================Teams Power Users==============================================*/
+
+SELECT sender_id,
+count(message_id)
+FROM messages
+where  EXTRACT(year from sent_date)= 2022 AND EXTRACT (MONTH from sent_date) =8
+group by sender_id
+order by count(message_id) DESC
+limit 2;
+/*========================================================================*/
