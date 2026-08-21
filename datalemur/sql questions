@@ -95,7 +95,7 @@ from employee emp
 join employee mgr
 on  emp.manager_id = mgr.employee_id
 where emp.salary>mgr.salary;
-/*======================APP CLICK THROUGH RATE (CTR)========================================================*/
+/* 12. ======================APP CLICK THROUGH RATE (CTR)========================================================*/
 
 select 
 app_id,
@@ -112,7 +112,7 @@ where EXTRACT(year from timestamp) = 2022
 group by event_type,app_id
 ) t
 group by app_id;
-/*==========================Second Day Confirmation===========================================================*/
+/* 13. ==========================Second Day Confirmation===========================================================*/
 
 SELECT e.user_id
 FROM emails e 
@@ -121,7 +121,18 @@ on e.email_id = t.email_id
 where signup_action = 'Confirmed' AND 
 (EXTRACT(day from t.action_date)- EXTRACT(day from e.signup_date)) = 1 ;
 
-/*=================================================================*/
+/* 14. =============================Final Account Balance  PayPal SQL Interview Question====================================*/
 
+SELECT account_id,
+CAST(SUM(CASE
+WHEN transaction_type = 'Deposit' THEN amount
+WHEN transaction_type = 'Withdrawal' THEN -amount
+ELSE 0
+END) AS DECIMAL)
+AS final_balance
+FROM transactions
+group by account_id;
+
+/*=========================================================================================================*/
 
 
