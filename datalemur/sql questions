@@ -167,3 +167,16 @@ SELECT
     /SUM(order_occurrences)
   ,1) AS mean
 FROM items_per_order;
+
+/*=======================================Patient Support Analysis (Part 1) UnitedHealth SQL Interview Question===================================================*/
+
+select count(*) from
+(
+SELECT policy_holder_id,
+count(case_id)
+FROM callers
+group by policy_holder_id
+having count(case_id)>=3)t
+
+/*=====================================================================*/
+
