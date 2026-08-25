@@ -214,6 +214,22 @@ select
 customername,totalrevenue,
 RANK() over( order by totalrevenue desc) as rn
 from CTE;
+-------------------------------------------
+--------------------------------------
+---Find the number of Delivered and Cancelled orders.
+select 'Deliveredd' as Measure ,count(order_id) from orders where order_status = 'Delivered'
+union 
+select 'Cancelledd' as Measure, count(order_id) from orders where order_status = 'Cancelled'
+
+-----------------------------------------
+-------Find the category with the highest total revenue.
+select  top 1 category,
+sum(price * quantity * (1-discount)) as totalrevenue
+from products p 
+join order_items o
+on p.product_id = o.product_id
+group by category
+order by totalrevenue DESC
 
 
 
