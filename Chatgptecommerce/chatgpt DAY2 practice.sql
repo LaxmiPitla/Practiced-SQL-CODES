@@ -1,21 +1,19 @@
------------
--- customers from hyderabad
 select * from customers
 where city = 'Hyderabad';
----------- price greater than 5000
+----------
 select * from products
 where price>5000;
 
----- number of orders
+----
 select count(*) from orders;
------- total products sold 
+------
 select product_id,sum(quantity) from order_items
 group by product_id;
---------- total price of product id 
+---------
 select product_id,sum(price) from products
 group by product_id;
 
------- Total revneue of products 
+------
 select * from products;
 select * from order_items;
 
@@ -24,7 +22,7 @@ from products p
 join order_items o 
 on p.product_id = o.product_id
 group by p.product_id
-------------------------- customers placed more then 1 order
+-------------------------
 select c.customer_name,count(c.customer_id) as nooforders from customers c
 join orders o 
 on c.customer_id = o.customer_id
@@ -216,7 +214,6 @@ select
 customername,totalrevenue,
 RANK() over( order by totalrevenue desc) as rn
 from CTE;
--------------------------------------------
 --------------------------------------
 ---Find the number of Delivered and Cancelled orders.
 select 'Deliveredd' as Measure ,count(order_id) from orders where order_status = 'Delivered'
@@ -232,10 +229,6 @@ join order_items o
 on p.product_id = o.product_id
 group by category
 order by totalrevenue DESC
-
-
-
-
 
 
 
