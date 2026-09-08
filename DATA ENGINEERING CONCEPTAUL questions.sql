@@ -91,7 +91,10 @@ on s.order_id =t.order_id
 where s.customer_id<>t.customer_id or 
 s.amount<>t.amount
 group by order_id
----------------------------------QUESTION 60 Data Engineering: Incremental Data
+********************************************************************************************************************************
+------------------------------------------------------------------------DAY 6
+********************************************************************************************************************************
+----------------------------------------------------QUESTION 60 Data Engineering: Incremental Data
 --Write a query to extract only the records 
 --that were newly created or updated after the last successful pipeline run.2026-08-26 23:59:59
 select * from orders 
