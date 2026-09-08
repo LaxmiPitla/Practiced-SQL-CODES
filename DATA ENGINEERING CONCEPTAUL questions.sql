@@ -1,4 +1,5 @@
---- DATA ENGINEERING CONCEPTUAL QUESTIONS 
+--- DATA ENGINEERING CONCEPTUAL QUESTIONS
+---------------------------------------------------------------------DAY 5 
 --------------------------------------QUESTION 50 (DEDUPLICATION)
 ---Write a query to keep only the latest record for each order_id based on updated_at.
 WITH CTE AS (
